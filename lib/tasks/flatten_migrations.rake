@@ -10,11 +10,6 @@ namespace :db do
   end
   
   private
-    def run_rake_task( task, force = false )
-      if force then Rake::Task[ "db:migrate" ].reenable end
-      Rake::Task[ "db:migrate" ].invoke
-    end
-    
     def check_schema
       schema_path = File.join "db", "schema.rb"
       begin
@@ -29,7 +24,8 @@ namespace :db do
     
     def migrate_db( force = false )
       puts "\033[0;95mRunning #{force ? "initial" : "pending "}migration#{force ? "" : "s"}.\033[0m"
-      run_rake_task( "db:migrate", force )
+      if force then Rake::Task[ "db:migrate" ].reenable end
+      Rake::Task[ "db:migrate" ].invoke
       puts "\033[0;92mDone.\033[0m"
     end
     
