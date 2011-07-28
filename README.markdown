@@ -14,6 +14,15 @@ So in your *project*/config/environments/*.rb you should have a line:
 config.active_record.schema_format = :ruby
 ```
 
+Installation
+------------
+Just add
+```
+gem 'flatten_migrations'
+```
+to development group in your Gemfile.
+
+
 How does it work
 ----------------
 
