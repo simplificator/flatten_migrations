@@ -9,7 +9,9 @@ Requirements
 You have to ensure that your **schema format is set to :ruby** in configuration of
 your project.  
 So in your *project*/config/environments/*.rb you should have a line:  
-> config.active_record.schema_format = :ruby
+```ruby
+config.active_record.schema_format = :ruby
+```
 
 How does it work
 ----------------
