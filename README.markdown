@@ -35,6 +35,6 @@ The task steps are as follows:
   4. create auxiliary migration which adjusts the schema_migrations table
   5. run the new migration
 
-**Both new migrations (*initial* and *auxiliary*) are also irreversible.**
+**Both new migrations (*initial* and *auxiliary*) are irreversible.**
 
 Your database is safe and it should not erase any data except the schema_migrations table. 
