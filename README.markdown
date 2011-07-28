@@ -25,4 +25,5 @@ What the task does is:
   4. run the new migration
 
 The new migration will clear schema_migrations table so it won't mess up
-with versions. It is also irreversible.
+with versions.  
+**It is also irreversible.**
