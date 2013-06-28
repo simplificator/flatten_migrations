@@ -1,7 +1,7 @@
 Flatten migrations
 ===================
 
-A gem that adds db:flatten_migrattions to rake tasks in your rails project.
+A gem that adds `rake db:flatten_migrations` to rake tasks in your rails project.
 
 Requirements
 ------------
