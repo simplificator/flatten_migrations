@@ -41,19 +41,19 @@ namespace :db do
       initial_file  = File.open( File.join( Rails.root.to_s, "db", "migrate", "#{ActiveRecord::Migrator.current_version.to_s}_initial.rb" ), 'w' )
       initial_file.write( 
         "class Initial < ActiveRecord::Migration\n" + \
-          "\tdef self.up\n" )
+          "  def self.up\n" )
             
       no_write_flag = true
       File.open( File.join( Rails.root.to_s, "db", "schema.rb" ), 'r').each_line do |line|
-        initial_file.write "\t#{line.gsub( /,(\s*):force(\s*)=>(\s*)true/, "" )}" unless no_write_flag
+        initial_file.write "  #{line.gsub( /,(\s*):force(\s*)=>(\s*)true/, "" )}" unless no_write_flag
         no_write_flag = !( line.starts_with? "ActiveRecord::Schema.define" ) unless !no_write_flag
       end
       
       initial_file.write(
         "\n" + \
-          "\tdef self.down\n" + \
-            "\t\traise ActiveRecord::IrreversibleMigration\n" + \
-          "\tend\n" + \
+          "  def self.down\n" + \
+            "    raise ActiveRecord::IrreversibleMigration\n" + \
+          "  end\n" + \
         "end\n" )
       initial_file.close
       puts "\033[0;92mDone.\033[0m"
@@ -63,13 +63,13 @@ namespace :db do
       puts "\033[0;95mCreating auxiliary migration that will fix schema_migrations table.\033[0m"
       File.open( File.join( Rails.root.to_s, "db", "migrate", "#{Time.now.strftime "%Y%m%d%H%M%S"}_auxiliary.rb" ), 'w' ) do |f|
         f.puts "class Auxiliary < ActiveRecord::Migration"
-        f.puts   "\tdef self.up\n"
-        f.puts     "\t\texecute \"TRUNCATE schema_migrations;\""
-        f.puts     "\t\texecute \"INSERT INTO schema_migrations VALUES ('#{ActiveRecord::Migrator.current_version.to_s}');\""
-        f.puts   "\tend\n"
-        f.puts   "\tdef self.down\n"
-        f.puts     "\t\traise ActiveRecord::IrreversibleMigration"
-        f.puts   "\tend"
+        f.puts   "  def self.up\n"
+        f.puts     "    execute \"TRUNCATE schema_migrations;\""
+        f.puts     "    execute \"INSERT INTO schema_migrations VALUES ('#{ActiveRecord::Migrator.current_version.to_s}');\""
+        f.puts   "  end\n"
+        f.puts   "  def self.down\n"
+        f.puts     "    raise ActiveRecord::IrreversibleMigration"
+        f.puts   "  end"
         f.puts "end\n"
       end      
     end
